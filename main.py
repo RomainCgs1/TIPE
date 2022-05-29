@@ -9,9 +9,13 @@ cap = cv2.VideoCapture(0)
 # cap = cv2.VideoCapture('filename.mp4')
 
 while True:
-    # Read the frame
-    _, img = cap.read()
-    # Convert to grayscale
+    # Capture frame-by-frame
+    ret, img = cap.read()
+    # if frame is read correctly ret is True
+    if not ret:
+        print("Can't receive frame (stream end?). Exiting ...")
+        break
+    # Our operations on the frame come here
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     # Detect the faces
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
